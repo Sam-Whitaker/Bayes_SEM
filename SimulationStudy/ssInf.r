@@ -120,11 +120,11 @@ ssStorvik = function(data=y, N=10000, x0=c(762, 5), TT=1, dt=0.01, S=Sepi) {
   )
 
   # Loop over all observations
-  for (i in 1:length(data)) {
+  for (i in seq_along(data)) {
     message(i)
     # Propagate dynamic processes
-    prop <- simplify2array(
-      t(
+    prop <- t(
+      simplify2array(
         mclapply(
           1:N, ssBridge, xmat, theta[, 2:4], theta[, 1], data[i], TT, dt, S,
           mc.cores=detectCores()-8

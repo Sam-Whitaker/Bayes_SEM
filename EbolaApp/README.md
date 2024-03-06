@@ -1,8 +1,10 @@
 # Ebola application
 Here you will find the code for replicating the Ebola application.
 
-data.r - Code to import the data 
+ebolaData.csv - Weekly incidence counts of Ebola in Seirra Leone spanning  
 
-ebolaFuns.r - Functions required to perform inference
+ebolaInf.r - Functions for inference for Ebola application via particle filter
 
-ebolaRun.r - Run the inference code 
+ebolaForecast.r - Function to perform forecasting for Ebola application using particle filter output
+
+ebolaRun.r - Code to run particle filter and produce forecasts
