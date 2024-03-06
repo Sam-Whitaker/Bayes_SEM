@@ -11,8 +11,9 @@ ebolaRun.r - Code to run particle filter and produce forecasts
 
 Summaries (mean and 95% credible interval) for model parameters through time:
 
-![plot](summariesEbola.pdf)
+![plot](figs/summariesEbola.jpg)
+**
 
 Five one-step-ahead forecasts for last five (non-zero) observations (using particle filter output)
 
-![plot2](forecastsEbola.jpg)
+![plot2](figs/forecastsEbola.jpg)
