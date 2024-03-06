@@ -17,6 +17,7 @@ sqrtmat = function(v) {
 }
 
 rmvn = function(m, v) {
+  # Input: mean vector m and variance matrix v
   p <- length(m)
   z <- rnorm(p)
   return(m + sqrtmat(v) %*% z)
@@ -24,12 +25,13 @@ rmvn = function(m, v) {
 
 
 ################################################################################
-#     Define hazard function, stoichiometry matrix, P and condition hazard     #
+#      Define hazard function, stoichiometry matrix, and condition hazard      #
 ################################################################################
 
 hazard = function(state, theta) {
-  # state is a length-3 vector (S,E,I)
-  # rate is a length-3 vector (beta,kappa,gamma)
+  # Input:
+  #  - state: a length-3 vector (S,E,I)
+  #  - theta: a length-3 vector (beta,kappa,gamma)
   c(
     theta[1] * state[1] * state[3],
     theta[2] * state[2],
@@ -46,7 +48,14 @@ stoic <- matrix(
 )
 
 cond_hazard = function(state, theta, phi, obs, curr, inter, rcurr) {
-  # phi is a length-2 vector (rho,nu)
+  # Input
+  #  - state: a length-3 vector (S,E,I)
+  #  - theta: a length-3 vector (beta,kappa,gamma)
+  #  - phi: a length-2 vector (rho,nu)
+  #  - obs: the next observation
+  #  - curr: the current simulated time
+  #  - inter: the inter-observation time
+  #  - rcurr: the current simulated incidence
   h <- hazard(state, theta)
   mu <- phi[1] * (rcurr[2] + h[2] * (inter - curr))
   out <- c(
@@ -68,7 +77,14 @@ cond_hazard = function(state, theta, phi, obs, curr, inter, rcurr) {
 ################################################################################
 
 ebola_bridge = function(i, state, theta, phi, obs, inter, dtau, sepi = stoic) {
-  # state, theta, phi are all be matrices with rows as in vectors above
+  # Input:
+  #  - i: the particle number index
+  #  - state, theta, phi are all matrices with rows as in vectors above
+  #  - obs: the next observation
+  #  - inter: the inter-observation time
+  #  - dtau: the Poisson leap time step
+  #  - sepi: the stoichiometry matrix
+  # Initialise storage
   len <- inter / dtau + 1
   btheta <- theta[i, ]
   bphi <- phi[i, ]
@@ -78,13 +94,16 @@ ebola_bridge = function(i, state, theta, phi, obs, inter, dtau, sepi = stoic) {
   sumg <- matrix(0, ncol = 3, nrow = len)
   sumg[1, ] <- c(xmat[1, 1] * xmat[1, 3], xmat[1, 2], xmat[1, 3])
   llr <- 0
-  count <- 1
+  # Begin loop
   for (k in 1:(len - 1)) {
+    # Calculate the hazard and conditioned hazard
     h <- hazard(xmat[k, ], btheta)
     hs <- cond_hazard(
       xmat[k, ], btheta, bphi, obs, (k - 1) * dtau, inter, sumr[k, ]
     )
+    # Simulate incidence
     rnew <- rpois(3, hs * dtau)
+    # Update state and summaries
     xmat[k + 1, ] <- xmat[k, ] + sepi %*% rnew
     if (any(xmat[k + 1, ] < 0) == TRUE) {
       xmat[k + 1, which(xmat[k + 1, ] < 0)] <- 0
@@ -95,10 +114,11 @@ ebola_bridge = function(i, state, theta, phi, obs, inter, dtau, sepi = stoic) {
       c(
         xmat[k + 1, 1] * xmat[k + 1, 3], xmat[k + 1, 2], xmat[k + 1, 3]
       )
+    # Calculate the log-likelihood ratio
     llr <- llr + sum(dpois(rnew, h * dtau, log = TRUE)) -
       sum(dpois(rnew, hs * dtau, log = TRUE))
-    count <- count + 1
   }
+  # Compute the log-weight
   lwt <- llr + dnbinom(
     obs, mu = phi[1] * sumr[len, 2], size = bphi[2], log = TRUE
   )
@@ -113,6 +133,14 @@ ebola_storvik = function(
   parts = 100000, dat = data, x0 = c(44326, 15, 10), inter = 1, dt = 1 / 7,
   a = c(0.2, 5, 10, 0.85, 5), b = c(5000, 4.6, 10, 0.75, 0.1), sepi = stoic
 ) {
+  # Input:
+  #  - parts: the number of particles to use
+  #  - dat: the data
+  #  - x0: the initial state
+  #  - inter: the inter-observation time
+  #  - dt: the Poisson leap time step
+  #  - a, b: prior hyper-parameters
+  #  - sepi: the stoichiometry matrix
   #Initialise with prior draws
   cmat <- matrix(0, ncol = 5, nrow = parts)
   # cmat contains beta, omega, gamma, rho, nu
