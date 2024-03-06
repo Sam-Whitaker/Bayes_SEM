@@ -9,11 +9,10 @@ ebolaForecast.r - Function to perform forecasting for Ebola application using pa
 
 ebolaRun.r - Code to run particle filter and produce forecasts
 
-Summaries (mean and 95% credible interval) for model parameters through time:
+## Key plots
 
 ![plot](figs/summariesEbola.jpg)
-**
-
-Five one-step-ahead forecasts for last five (non-zero) observations (using particle filter output)
+*Means (red) and 95% credible intervals (blue) for model parameters through time.*
 
 ![plot2](figs/forecastsEbola.jpg)
+*Five one-step-ahead forecasts for last five (non-zero) observations (using particle filter output). Observed values overlaid as dotted lines.*
