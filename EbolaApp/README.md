@@ -1,7 +1,7 @@
 # Ebola application
 Here you will find the code for replicating the Ebola application.
 
-ebolaData.csv - Weekly incidence counts of Ebola in Seirra Leone spanning  
+ebolaData.csv - Weekly incidence counts of Ebola in Seirra Leone spanning  May 2014 - May 2015.
 
 ebolaInf.r - Functions for inference for Ebola application via particle filter
 
