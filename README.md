@@ -5,7 +5,7 @@ The paper considers sequential Bayesian inference for S(E)IR model parameters an
 
 The code can be used to reproduce the analysis for the applications in Section 4.
 
-Code for each application (4.1 Simulation Study, 4.2 Ebola application and 4.3 Covid application) can be found in the corresponding directories. To run the inference scheme start with "run.r". 
+Code for each application (4.1 Simulation Study, 4.2 Ebola application and 4.3 Covid application) can be found in the corresponding directories. To run the inference scheme start with "run.r". Edit
 
 Each directory also includes the following:
 - hazard.r - Containing functions to calculate the conditioned hazard;
