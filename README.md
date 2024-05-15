@@ -21,3 +21,11 @@ Each directory includes the following files:
 - particle_filter.R - Containing a function to implement Algorithm 2;
 - forecast.R - Containing a function to generate forecasts from the output of run.r;
 - forecast_run.R - Code to generate and store the forecasts.
+
+## Timings
+
+The following timings are provided as a rough guide for the user. Note that these timings are based on running the schemes on a PC with a 2.6 GHz clock speed, parallelised across 20 cores.
+
+- 4.1 Simulation Study: 16 minutes
+- 4.2 Ebola: 5 hours
+- 4.3 Covid-19 in New York: 50 minutes
