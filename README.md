@@ -1,4 +1,4 @@
-# Bayes_SEM
+# Sequential_Bayes_Epi
 R code for implementing the methods relating to: INSERT_LINK
 
 Cite as:
