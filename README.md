@@ -7,11 +7,12 @@ The code in this repository can be used to reproduce the analysis for the applic
 
 ## Organisation
 
-Code for each application (4.1 Simulation Study, 4.2 Ebola application and 4.3 Covid application) can be found in the corresponding directories. To run the inference scheme start with "run.r".
+Code for each application (4.1 Simulation Study, 4.2 Ebola application and 4.3 Covid application) can be found in the corresponding directories. To run the inference scheme start with "run.R".
 
 Each directory also includes the following:
-- hazard.r - Containing functions to calculate the conditioned hazard;
-- bridge.r - Containing functions to implement the bridge in parallel;
-- particle_filter.r - Containing a function to implement Algorithm 2;
-- forecast.r - Containing a function to generate forecasts from the output of run.r;
-- forecast_run.r - Code to generate and store the forecasts.
+- data.csv - A file containing the data for the analysis;
+- hazard.R - Containing functions to calculate the conditioned hazard;
+- bridge.R - Containing functions to implement the bridge in parallel;
+- particle_filter.R - Containing a function to implement Algorithm 2;
+- forecast.R - Containing a function to generate forecasts from the output of run.r;
+- forecast_run.R - Code to generate and store the forecasts.
