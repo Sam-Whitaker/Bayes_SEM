@@ -28,7 +28,6 @@ x0 = cbind(S,I)
 
 system.time(
   covid_output <- covid_storvik(
-    parts = 4e6, dt = 0.1, a = c(2, 5, 10, 0.85, 5),
-    b = c(50000, 4.6, 10, 0.75, 0.2)
+    parts = 4e6, dt = 0.1
   )
 )

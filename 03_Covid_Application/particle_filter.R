@@ -26,8 +26,8 @@ covid_storvik = function(
   theta[, 7] <- exp(theta[, 1]) / theta[, 2]
   xmat <- x0
   # Set up storage of parameters and states for forecasting
-  cstore <- array(dim = c(parts, 6, 5))
-  xstore <- array(dim = c(parts, 3, 5))
+  cstore <- array(dim = c(parts, 7, 5))
+  xstore <- array(dim = c(parts, 2, 5))
   # Set up storage for summaries
   # 9 means followed by 9 lower quantiles followed by 9 upper quantiles
   sum_traj <- matrix(0, ncol = 27, nrow = (length(dat) + 1))
