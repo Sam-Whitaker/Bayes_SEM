@@ -1,7 +1,7 @@
 # Sequential_Bayes_Epi
-R code for implementing the methods relating to: INSERT_LINK
+R code for implementing the methods relating to: https://arxiv.org/abs/2405.13537
 
-Cite as:
+Cite as: Whitaker, S. A., Golightly, A., Gillespie, C. S., and Kypraios, T. (2024). Sequential Bayesian inference for stochastic epidemic models of cumulative incidence. arXiv preprint  	arXiv:2405.13537.
 
 The code in this repository can be used to reproduce the analysis for the applications in Section 4 of the paper.
 
